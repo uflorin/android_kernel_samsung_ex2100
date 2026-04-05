@@ -172,7 +172,9 @@ build_kernel() {
 
     echo "Building kernel..."
     echo "-----------------------------------------------"
+    pwd
     bear -- make ${MAKE_ARGS} -j$CORES || abort
+    pwd
 }
 
 build_boot() {
