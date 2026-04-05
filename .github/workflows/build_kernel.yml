@@ -1,6 +1,9 @@
 name: Kernel Build
 
 on:
+  push:  # Triggered on any push to the repository
+    branches:
+      - feature/asr
   workflow_dispatch:
     inputs:
       tag_name:
