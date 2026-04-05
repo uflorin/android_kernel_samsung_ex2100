@@ -172,7 +172,7 @@ build_kernel() {
 
     echo "Building kernel..."
     echo "-----------------------------------------------"
-    make ${MAKE_ARGS} -j$CORES || abort
+    bear -- make ${MAKE_ARGS} -j$CORES || abort
 }
 
 build_boot() {

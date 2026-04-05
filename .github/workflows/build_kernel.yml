@@ -79,7 +79,7 @@ jobs:
         sudo apt-get install -y \
           build-essential openjdk-8-jdk maven cmake byacc flex automake libtool-bin \
           bison binutils-dev libiberty-dev zip unzip libncurses5-dev curl git ninja-build \
-          python3 libssl-dev gcc-aarch64-linux-gnu cpio gawk libarchive-tools lz4 repo
+          python3 libssl-dev gcc-aarch64-linux-gnu cpio gawk libarchive-tools lz4 repo bear
 
     - name: Set build flags for variant
       id: vars
@@ -96,12 +96,17 @@ jobs:
       run: |
         chmod +x ./build.sh
         ./build.sh -m ${{ matrix.model }} ${{ steps.vars.outputs.FLAGS }}
+        ls -la build/out/${{ matrix.model }}
+        ls -la ./
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
         name: ${{ matrix.model }}-${{ matrix.branch }}-${{ matrix.variant }}
-        path: build/out/${{ matrix.model }}/*.zip
+        path: |
+          build/out/${{ matrix.model }}/*.zip
+          build/out/${{ matrix.model }}/compile_commands.json
+          compile_commands.json
 
 
   release:
